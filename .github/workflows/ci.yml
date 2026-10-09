@@ -35,3 +35,12 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t aws-devops-platform:ci .
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: aws-devops-platform:ci
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH
