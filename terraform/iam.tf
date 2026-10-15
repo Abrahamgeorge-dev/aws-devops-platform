@@ -31,3 +31,8 @@ resource "aws_iam_instance_profile" "ec2_ecr_pull" {
   name = "aws-devops-platform-ec2-ecr-pull-profile"
   role = aws_iam_role.ec2_ecr_pull.name
 }
+
+resource "aws_iam_role_policy_attachment" "ec2_ssm_managed_instance_core" {
+  role       = aws_iam_role.ec2_ecr_pull.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
